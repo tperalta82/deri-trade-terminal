@@ -1,5 +1,5 @@
 import sys
-
+import os
 from functools import partial
 
 from deriui import Ui_MainWindow
@@ -112,7 +112,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stopOrderPriceInput.setValidator(QDoubleValidator())
 
         self.webView = QtWebEngineWidgets.QWebEngineView(self)
-        self.webView.setUrl(QtCore.QUrl("https://www.deribit.com/ftu_chart?instr=BTC-PERPETUAL"))
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "chart.html"))
+        self.webView.setUrl(QtCore.QUrl.fromLocalFile(file_path))  
         self.webView.setObjectName("webView")
 
         self.horizontalLayout_4.addWidget(self.webView)
